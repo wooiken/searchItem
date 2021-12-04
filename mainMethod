@@ -1,0 +1,114 @@
+import java.util.Scanner;
+
+public class findItem {
+
+	// function to search item in the retail store (linear search function)
+	public static void searchItem(int[] list, int target, String[] sList) {
+		int result = 0;
+		
+		// will search through the whole list look for the item ID
+		for (int i=0; i<list.length; i++) {
+
+			if (list[i] == target){
+				System.out.println("This item is: " + sList[i]);
+				result++;
+				break;
+			} else {
+				result = 0;
+			}
+		}
+		
+		// if item ID not in the list
+		if (result == 0) {
+			System.out.println("This item can't be found in the list");
+		}
+
+	}
+	
+	// function to add ID into the inventory list
+	public static int[] addID (int n, int list[], int x) {
+	
+		// create new array with additional 1 size 
+		int addedArr[] = new int[n+1]; 
+		
+		//copy original array into new array
+		for (int i = 0; i <n; i++)
+			addedArr[i] = list[i];
+		
+			addedArr[n]= x;
+			return addedArr;
+	}
+	
+	// function to add item name into the inventory list
+	public static String[] addItem (int n, String list[], String y) {
+		
+		// similar as above function 
+		String addedArr[] = new String [n+1]; 
+		
+		for (int i = 0; i <n; i++)
+			addedArr[i] = list[i];
+		
+			addedArr[n]= y;
+			return addedArr;
+	}
+	
+
+	
+	public static void main(String[] args) {
+		
+		// original array list
+		int id[] = {3,10,134,1108,331,67,88,56,99,92};
+		String inventory [] = {"Ayam Brand's Tuna", "Olive oil", "Meiji Yogurt", "Dynamo Detergent", 
+				"Julie's chocholate Waffer","No brand Brush","Ye Lai Xiang Bak Zhang","Gardenia White Bread",
+				"Maggie Mee Curry Flavor", "Pepsi Light"};
+		
+		System.out.println("Please select following function:");
+		System.out.println("1: Add item");
+		System.out.println("2: Search item");
+		System.out.print("Select: ");
+		
+		// user can select either option 1 or option 2
+		Scanner scan = new Scanner(System.in);
+		int selection = scan.nextInt();
+		
+		// this option will allow user add item into the inventory list
+		if (selection == 1) {
+			System.out.print("> Please input an item ID to add: ");
+			int input = scan.nextInt();
+			
+			// call the function and replace the new array to existing array 
+			id = addID(id.length, id, input);
+			
+			System.out.print(">> Please input item name: ");
+			String itemInput = scan.next();
+			inventory = addItem(inventory.length, inventory, itemInput);
+			System.out.println("--- Item Sucesfully added! ---");
+
+		}
+	
+		// this option will allow user search item in the inventory list
+		if (selection == 2) {
+		int count = 0;
+		
+		// this function will continue to run until user search through whole list of array
+		while (count < id.length) {
+			System.out.print("> Please input an item ID to search: ");
+			int input = scan.nextInt();
+			
+			// calling function of searching item ID
+			searchItem(id, input, inventory);
+			System.out.println("--------------------------------");
+			System.out.println("");
+			count++;
+		}
+		}
+		
+		// user neither select option 1 or option 2
+		if (selection != 1 && selection !=2) {
+			System.out.println("\n--------- Wrong selection ----------");
+			System.out.println("---- End of service, Thank you! ----");
+		} else 
+			System.out.println("\n---- End of service, Thank you! ----");
+
+	}
+}
